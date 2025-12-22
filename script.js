@@ -179,13 +179,15 @@ function handleStateChange(newState) {
             // Display note modal with current note content
             if (noteModal && noteText) {
                 noteText.textContent = getCurrentNote();
-                noteModal.classList.remove('hidden');
 
-                // Scroll to top of note content
+                // Scroll to top before showing modal
                 const noteWrapper = noteModal.querySelector('.note-content-wrapper');
                 if (noteWrapper) {
                     noteWrapper.scrollTop = 0;
                 }
+
+                // Show modal after scroll reset
+                noteModal.classList.remove('hidden');
             }
 
             break;
@@ -267,13 +269,15 @@ function handleStateChange(newState) {
             // Display note modal with selected note content
             if (noteModalTree && noteTextTree) {
                 noteTextTree.textContent = NOTES[currentReadingNoteIndex];
-                noteModalTree.classList.remove('hidden');
 
-                // Scroll to top of note content
+                // Scroll to top before showing modal
                 const noteWrapperTree = noteModalTree.querySelector('.note-content-wrapper');
                 if (noteWrapperTree) {
                     noteWrapperTree.scrollTop = 0;
                 }
+
+                // Show modal after scroll reset
+                noteModalTree.classList.remove('hidden');
             }
 
             break;
@@ -383,7 +387,7 @@ As far as the plot is concerned, the anecdote about Esther manipulating her coll
 ______
 The last theme which stuck out to me was self-sabotage rooted in a belief that one does not deserve to be happy. Narrative wise, the moment that first shows this—in my opinion—is after her return from New York when she finds out that she didn't get into the writing program she had planned on. Then, when she called her friend who she intended to move in with to tell her the news, the friend urges her to move there anyways and they'll figure something out, but Esther denies the offer. The regret she feels after making that decision and the beginnings of her negative spiraling after that decision read to me as self-sabotage rooted in a belief she does not deserve happiness. These are feelings with which I am intimately familiar. I would guess that—for me—these feelings were a product of growing up with minimal community and strong habits of judgment and separation filling that void, but one ought to never be too certain. Regardless, a deep rooted sense that I don't deserve to be happy took root a long time ago and manifested in all manners of self-sabotage—especially throughout my high school years. I am actually writing this shortly after the piece I shared with you on my relationship with fear, so exposition on how my self-worth has evolved in recent years feels redundant. That being said, the detail and rawness with which these kinds of thoughts are portrayed in the Bell Jar is beautifully real.
 ______
-In conclusion, the Bell Jar is the most personally raw, real, and honest depiction of the complexities of the interior experience of a person—in my opinion. Thank you for sharing it with me, I thoroughly enjoyed it.
+In conclusion, the Bell Jar is the most personally raw, real, and honest depiction of the complexities of the interior experience of a person—in my opinion—that I have ever read. Thank you for sharing it with me, I thoroughly enjoyed it.
 
 Lovingly,
 Micah`
@@ -477,11 +481,11 @@ function transitionToBenchScene() {
 function showTextBoxWithTypewriter(text) {
     if (!textBox || !textBoxContent) return;
 
+    // Play text box appear sound immediately (before showing)
+    playSoundEffect('assets/audio/text-box-appear-audio.mp3', 0.5);
+
     // Show the text box
     textBox.classList.remove('hidden');
-
-    // Play text box appear sound
-    playSoundEffect('assets/audio/text-box-appear-audio.mp3', 0.5);
 
     // Clear previous content
     textBoxContent.textContent = '';
@@ -995,13 +999,13 @@ function onNoteButtonClick() {
     console.log('[EVENT] Note button clicked');
 
     if (currentState === STATES.NOTE_BUTTON_VISIBLE) {
+        // Play note open audio immediately
+        playSoundEffect('assets/audio/note-open-audio.wav', 0.6);
+
         // Hide note button immediately to prevent double-clicks
         if (noteButton) {
             noteButton.style.pointerEvents = 'none';
         }
-
-        // Play note open audio
-        playSoundEffect('assets/audio/note-open-audio.wav', 0.6);
 
         // Transition to READING_NOTE
         setState(STATES.READING_NOTE);
@@ -1064,11 +1068,11 @@ function onTreeSquirrelClick(noteIndex) {
     lastSquirrelClickTime = now;
 
     if (currentState === STATES.TREE_VIEW) {
+        // Play note open audio immediately
+        playSoundEffect('assets/audio/note-open-audio.wav', 0.6);
+
         // Set which note to read
         currentReadingNoteIndex = noteIndex;
-
-        // Play note open audio
-        playSoundEffect('assets/audio/note-open-audio.wav', 0.6);
 
         // Transition to READING_NOTE_TREE
         setState(STATES.READING_NOTE_TREE);
