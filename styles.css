@@ -215,7 +215,7 @@ html, body {
     z-index: 150;
 }
 
-/* Note modal - parchment style */
+/* Note modal - dark brown style */
 .note-modal {
     position: absolute;
     top: 50%;
@@ -224,12 +224,8 @@ html, body {
     width: 90%;
     max-width: 600px;
     max-height: 70vh;
-    background-color: #f5e6d3;
-    background-image:
-        linear-gradient(45deg, transparent 24%, rgba(139, 119, 101, 0.03) 25%, rgba(139, 119, 101, 0.03) 26%, transparent 27%, transparent 74%, rgba(139, 119, 101, 0.03) 75%, rgba(139, 119, 101, 0.03) 76%, transparent 77%, transparent),
-        linear-gradient(45deg, transparent 24%, rgba(139, 119, 101, 0.03) 25%, rgba(139, 119, 101, 0.03) 26%, transparent 27%, transparent 74%, rgba(139, 119, 101, 0.03) 75%, rgba(139, 119, 101, 0.03) 76%, transparent 77%, transparent);
-    background-size: 50px 50px;
-    border: 4px solid #8b7765;
+    background-color: #4a3422;
+    border: 4px solid #3a2819;
     border-radius: 8px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
     z-index: 200;
@@ -245,7 +241,7 @@ html, body {
 .note-modal #note-text {
     font-family: 'Patrick Hand', cursive;
     font-size: 1.2em;
-    color: #2d2520;
+    color: #faf8f0;
     line-height: 1.8;
     margin: 0 0 30px 0;
     white-space: pre-wrap;
@@ -255,7 +251,7 @@ html, body {
 .note-modal #note-text-tree {
     font-family: 'Patrick Hand', cursive;
     font-size: 1.2em;
-    color: #ffffff;
+    color: #faf8f0;
     line-height: 1.8;
     margin: 0 0 30px 0;
     white-space: pre-wrap;
@@ -334,10 +330,10 @@ html, body {
     padding: 12px 24px;
     font-family: 'Patrick Hand', cursive;
     font-size: 1.2em;
-    color: #2d2d2d;
-    background-color: #f4e4c1;
-    border: 3px solid #2d2d2d;
-    box-shadow: 4px 4px 0 #2d2d2d;
+    color: #faf8f0;
+    background-color: #4a3422;
+    border: 3px solid #3a2819;
+    box-shadow: 4px 4px 0 #3a2819;
     cursor: pointer;
     transition: all 0.2s ease;
     text-transform: none;
@@ -346,22 +342,22 @@ html, body {
 }
 
 .pixel-button:hover:not(:disabled) {
-    background-color: #fff5d6;
+    background-color: #5a422a;
     transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0 #2d2d2d;
+    box-shadow: 6px 6px 0 #3a2819;
 }
 
 .pixel-button:active:not(:disabled) {
     transform: translate(2px, 2px);
-    box-shadow: 2px 2px 0 #2d2d2d;
+    box-shadow: 2px 2px 0 #3a2819;
 }
 
 .pixel-button:disabled {
-    background-color: #ccc;
+    background-color: #3a2819;
     color: #888;
     cursor: not-allowed;
     transform: none;
-    box-shadow: 4px 4px 0 #666;
+    box-shadow: 4px 4px 0 #2a1a0f;
     opacity: 0.6;
 }
 
