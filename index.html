@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Squirrel Notes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Loading screen -->
+    <div id="loading-screen">
+        <div class="loading-content">
+            <h1>Squirrel Notes</h1>
+            <p class="loading-text">Loading<span class="loading-dots"></span></p>
+        </div>
+    </div>
+
+    <div id="game-container" class="hidden">
+        <!-- Audio toggle button (persists across scenes) -->
+        <button id="audio-toggle-btn" class="audio-toggle-btn" title="Toggle audio">🔊</button>
+
+        <!-- Scene 1: Park Bench -->
+        <div id="scene-1" class="scene active">
+            <!-- Background -->
+            <img src="assets/backgrounds/main-scene-background.png" class="background" alt="Park scene">
+
+            <!-- Character on bench -->
+            <img src="assets/sprites/character/main-sitting.png" id="character" class="sprite" alt="Character sitting">
+
+            <!-- Backpack next to character -->
+            <img src="assets/sprites/items/backpack.png" id="backpack" class="sprite" alt="Backpack">
+
+            <!-- Walnut (hidden initially, ground center) -->
+            <img src="assets/sprites/items/walnut.png" id="walnut" class="sprite hidden" alt="Walnut">
+
+            <!-- Squirrel (hidden initially, off-screen left) -->
+            <img src="assets/sprites/squirrels/squirrel-red-idle.png" id="squirrel" class="sprite hidden" alt="Squirrel">
+
+            <!-- Note button (hidden initially, floats above character) -->
+            <img src="assets/sprites/items/note.png" id="note-button" class="sprite note-button hidden" alt="Note">
+
+            <!-- Text box for messages -->
+            <div id="text-box" class="text-box hidden">
+                <p id="text-box-content"></p>
+            </div>
+
+            <!-- Overlay for dimming scene when reading note -->
+            <div id="scene-overlay" class="scene-overlay hidden"></div>
+
+            <!-- Note modal for reading -->
+            <div id="note-modal" class="note-modal hidden">
+                <div class="note-content-wrapper">
+                    <p id="note-text"></p>
+                    <button id="done-reading-btn" class="pixel-button done-reading-btn">Done Reading</button>
+                </div>
+            </div>
+
+            <!-- Place Walnut button -->
+            <button id="place-walnut-btn" class="pixel-button">Place Walnut</button>
+
+            <!-- Visit Squirrels button (shown after all notes delivered) -->
+            <button id="visit-squirrels-btn" class="pixel-button hidden">Visit Squirrels</button>
+        </div>
+
+        <!-- Scene 2: Tree -->
+        <div id="scene-2" class="scene">
+            <!-- Background -->
+            <img src="assets/backgrounds/second-scene-background.png" class="background" alt="Tree scene">
+
+            <!-- Three squirrels in tree (clickable) -->
+            <img src="assets/sprites/squirrels/squirrel-red-idle.png" id="tree-squirrel-red" class="sprite tree-squirrel hidden" alt="Red squirrel" data-note-index="0">
+            <img src="assets/sprites/squirrels/squirrel-blue-idle.png" id="tree-squirrel-blue" class="sprite tree-squirrel hidden" alt="Blue squirrel" data-note-index="1">
+            <img src="assets/sprites/squirrels/squirrel-green-idle.png" id="tree-squirrel-green" class="sprite tree-squirrel hidden" alt="Green squirrel" data-note-index="2">
+
+            <!-- Overlay for dimming scene when reading note -->
+            <div id="scene-2-overlay" class="scene-overlay hidden"></div>
+
+            <!-- Note modal for reading (shared with scene 1) -->
+            <div id="note-modal-tree" class="note-modal hidden">
+                <div class="note-content-wrapper">
+                    <p id="note-text-tree"></p>
+                    <button id="done-reading-tree-btn" class="pixel-button done-reading-btn">Done Reading</button>
+                </div>
+            </div>
+
+            <!-- Back to Bench button -->
+            <button id="back-to-bench-btn" class="pixel-button back-to-bench-btn hidden">Back to Bench</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

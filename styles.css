@@ -1,0 +1,449 @@
+/* Squirrel Notes - Styles */
+
+/* Import handwriting-style Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #1a1a1a;
+    font-family: 'Patrick Hand', cursive;
+}
+
+/* Loading screen */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+}
+
+#loading-screen.fade-out {
+    opacity: 0;
+}
+
+.loading-content {
+    text-align: center;
+    color: #f4e4c1;
+}
+
+.loading-content h1 {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 3em;
+    margin-bottom: 20px;
+    color: #f4e4c1;
+}
+
+.loading-text {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1.5em;
+    color: #f4e4c1;
+}
+
+.loading-dots::after {
+    content: '';
+    animation: loading-dots 1.5s infinite;
+}
+
+@keyframes loading-dots {
+    0%, 20% {
+        content: '';
+    }
+    40% {
+        content: '.';
+    }
+    60% {
+        content: '..';
+    }
+    80%, 100% {
+        content: '...';
+    }
+}
+
+/* Game container - maintains 16:9 aspect ratio and centers */
+#game-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 56.25vw; /* 9/16 = 56.25% for 16:9 ratio */
+    max-height: 100vh;
+    max-width: 177.78vh; /* 16/9 = 177.78% */
+    background-color: #000;
+    overflow: hidden;
+}
+
+/* Scene container */
+.scene {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.scene.active {
+    display: block;
+}
+
+.scene.fading-out {
+    opacity: 0;
+}
+
+.scene.fading-in {
+    opacity: 0;
+}
+
+/* Background images */
+.background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+/* Sprite base styles - crisp pixel art rendering */
+.sprite {
+    position: absolute;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    transition: transform 0.1s ease;
+}
+
+/* Hidden elements */
+.hidden {
+    display: none;
+}
+
+/* Character positioning - sitting on bench */
+#character {
+    bottom: 13%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 27%;
+    height: auto;
+    transition: left 0.2s ease;
+    z-index: 10;
+}
+
+/* Backpack - next to character on the left */
+#backpack {
+    bottom: 20.6%;
+    left: 38%;
+    width: 13%;
+    height: auto;
+    z-index: 5;
+}
+
+/* Walnut - ground level, slightly left of center */
+#walnut {
+    bottom: 13%;
+    left: 45%;
+    transform: translateX(-50%);
+    width: 6%;
+    height: auto;
+}
+
+/* Squirrel - starts off-screen left */
+#squirrel {
+    bottom: 10%;
+    left: -10%;
+    width: 10%;
+    height: auto;
+    transform: translateX(-50%);
+    z-index: 15;
+    /* Transition will be added via JS for animation */
+}
+
+/* Note button - floating above character */
+.note-button {
+    bottom: 38%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12.8%;
+    height: auto;
+    cursor: pointer;
+    z-index: 50;
+    animation: note-bob 2s ease-in-out infinite;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.note-button:hover {
+    filter: brightness(1.3) drop-shadow(0 0 10px rgba(244, 228, 193, 0.6));
+    transform: translateX(-50%) scale(1.1);
+}
+
+/* Bobbing animation for note */
+@keyframes note-bob {
+    0%, 100% {
+        bottom: 38%;
+    }
+    50% {
+        bottom: 39%;
+    }
+}
+
+/* Scene overlay for dimming */
+.scene-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 150;
+}
+
+/* Note modal - parchment style */
+.note-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 600px;
+    max-height: 70vh;
+    background-color: #f5e6d3;
+    background-image:
+        linear-gradient(45deg, transparent 24%, rgba(139, 119, 101, 0.03) 25%, rgba(139, 119, 101, 0.03) 26%, transparent 27%, transparent 74%, rgba(139, 119, 101, 0.03) 75%, rgba(139, 119, 101, 0.03) 76%, transparent 77%, transparent),
+        linear-gradient(45deg, transparent 24%, rgba(139, 119, 101, 0.03) 25%, rgba(139, 119, 101, 0.03) 26%, transparent 27%, transparent 74%, rgba(139, 119, 101, 0.03) 75%, rgba(139, 119, 101, 0.03) 76%, transparent 77%, transparent);
+    background-size: 50px 50px;
+    border: 4px solid #8b7765;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    z-index: 200;
+    overflow: hidden;
+}
+
+.note-content-wrapper {
+    padding: 40px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.note-modal #note-text {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1.2em;
+    color: #2d2520;
+    line-height: 1.8;
+    margin: 0 0 30px 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.note-modal #note-text-tree {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1.2em;
+    color: #ffffff;
+    line-height: 1.8;
+    margin: 0 0 30px 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.done-reading-btn {
+    position: static;
+    display: block;
+    margin: 0 auto;
+    transform: none;
+}
+
+/* Text box - pixel art RPG style */
+.text-box {
+    position: absolute;
+    bottom: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 600px;
+    padding: 20px 30px;
+    background-color: rgba(30, 30, 30, 0.85);
+    border: 4px solid #f4e4c1;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+
+.text-box p {
+    margin: 0;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1.3em;
+    color: #f4e4c1;
+    line-height: 1.5;
+    text-align: left;
+    min-height: 1.5em;
+}
+
+/* Tree squirrels - positioned in tree scene */
+.tree-squirrel {
+    width: 18%;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.tree-squirrel:hover {
+    filter: brightness(1.2) drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
+    transform: scale(1.1);
+}
+
+/* Position tree squirrels */
+#tree-squirrel-red {
+    bottom: 57%;
+    left: 35%;
+}
+
+#tree-squirrel-blue {
+    bottom: 51.5%;
+    left: 55%;
+}
+
+#tree-squirrel-green {
+    bottom: 54.5%;
+    left: 70%;
+}
+
+/* Pixel art styled button */
+.pixel-button {
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 12px 24px;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1.2em;
+    color: #2d2d2d;
+    background-color: #f4e4c1;
+    border: 3px solid #2d2d2d;
+    box-shadow: 4px 4px 0 #2d2d2d;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.pixel-button:hover:not(:disabled) {
+    background-color: #fff5d6;
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 #2d2d2d;
+}
+
+.pixel-button:active:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 #2d2d2d;
+}
+
+.pixel-button:disabled {
+    background-color: #ccc;
+    color: #888;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: 4px 4px 0 #666;
+    opacity: 0.6;
+}
+
+/* Mobile responsive text sizing */
+@media (max-width: 768px) {
+    .pixel-button {
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+}
+
+/* Back to Bench button - positioned in bottom-right */
+.back-to-bench-btn {
+    bottom: 5%;
+    right: 5%;
+    top: auto;
+    left: auto;
+}
+
+/* Audio toggle button - positioned in top-right */
+.audio-toggle-btn {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    min-width: 50px;
+    min-height: 50px;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(45, 45, 45, 0.8);
+    border: 2px solid #f4e4c1;
+    border-radius: 50%;
+    color: #f4e4c1;
+    font-size: 1.5em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 250;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    padding: 0;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.audio-toggle-btn:hover {
+    background-color: rgba(60, 60, 60, 0.95);
+    transform: scale(1.1);
+}
+
+.audio-toggle-btn:active {
+    transform: scale(0.95);
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .loading-content h1 {
+        font-size: 2em;
+    }
+
+    .loading-text {
+        font-size: 1.2em;
+    }
+
+    .text-box {
+        width: 90%;
+        padding: 15px 20px;
+    }
+
+    .text-box p {
+        font-size: 1.1em;
+    }
+
+    .note-modal {
+        width: 95%;
+    }
+
+    .note-content-wrapper {
+        padding: 25px;
+    }
+
+    .note-modal #note-text,
+    .note-modal #note-text-tree {
+        font-size: 1em;
+    }
+}
