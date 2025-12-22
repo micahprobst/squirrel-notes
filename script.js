@@ -180,6 +180,12 @@ function handleStateChange(newState) {
             if (noteModal && noteText) {
                 noteText.textContent = getCurrentNote();
                 noteModal.classList.remove('hidden');
+
+                // Scroll to top of note content
+                const noteWrapper = noteModal.querySelector('.note-content-wrapper');
+                if (noteWrapper) {
+                    noteWrapper.scrollTop = 0;
+                }
             }
 
             break;
@@ -262,6 +268,12 @@ function handleStateChange(newState) {
             if (noteModalTree && noteTextTree) {
                 noteTextTree.textContent = NOTES[currentReadingNoteIndex];
                 noteModalTree.classList.remove('hidden');
+
+                // Scroll to top of note content
+                const noteWrapperTree = noteModalTree.querySelector('.note-content-wrapper');
+                if (noteWrapperTree) {
+                    noteWrapperTree.scrollTop = 0;
+                }
             }
 
             break;
