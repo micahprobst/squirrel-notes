@@ -1148,6 +1148,7 @@ function preloadAssets() {
     return new Promise((resolve) => {
         let loadedCount = 0;
         const totalAssets = ASSETS.images.length + ASSETS.audio.length;
+        let resolved = false;
 
         console.log(`[PRELOAD] Loading ${totalAssets} assets...`);
 
@@ -1155,11 +1156,22 @@ function preloadAssets() {
             loadedCount++;
             console.log(`[PRELOAD] Progress: ${loadedCount}/${totalAssets}`);
 
-            if (loadedCount === totalAssets) {
+            if (loadedCount === totalAssets && !resolved) {
                 console.log('[PRELOAD] All assets loaded!');
+                resolved = true;
                 resolve();
             }
         };
+
+        // Timeout fallback - start game after 5 seconds even if assets aren't fully loaded
+        // This is important for mobile where audio may not preload
+        setTimeout(() => {
+            if (!resolved) {
+                console.warn(`[PRELOAD] Timeout reached. Loaded ${loadedCount}/${totalAssets} assets. Starting game anyway...`);
+                resolved = true;
+                resolve();
+            }
+        }, 5000);
 
         // Preload images
         ASSETS.images.forEach(src => {
@@ -1172,18 +1184,38 @@ function preloadAssets() {
             img.src = src;
         });
 
-        // Preload audio
+        // Preload audio with timeout for each file
         ASSETS.audio.forEach(src => {
             const audio = new Audio();
+            let audioLoaded = false;
+
+            // Timeout for individual audio file (2 seconds)
+            setTimeout(() => {
+                if (!audioLoaded) {
+                    console.warn(`[PRELOAD] Audio timeout: ${src}`);
+                    audioLoaded = true;
+                    checkComplete();
+                }
+            }, 2000);
+
             audio.oncanplaythrough = () => {
-                checkComplete();
+                if (!audioLoaded) {
+                    audioLoaded = true;
+                    checkComplete();
+                }
                 // Remove listener after first call
                 audio.oncanplaythrough = null;
             };
             audio.onerror = () => {
-                console.warn(`[PRELOAD] Failed to load audio: ${src}`);
-                checkComplete();
+                if (!audioLoaded) {
+                    console.warn(`[PRELOAD] Failed to load audio: ${src}`);
+                    audioLoaded = true;
+                    checkComplete();
+                }
             };
+
+            // Load metadata only to speed up on mobile
+            audio.preload = 'metadata';
             audio.src = src;
         });
     });
