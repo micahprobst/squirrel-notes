@@ -350,7 +350,7 @@ function getCurrentSquirrelColor() {
 const NOTES = [
     // Note 1 (Red Squirrel)
     `Merry Christmas Alejandra! 
-    Hopefully the painting survived the US Postal service. If it didn't just let me know. I hope you're enjoying your time back home and are living the Midwest holiday dream!
+    Hopefully the painting survived the TSA. If it didn't, well, I have plenty of reference photos to paint you a new one with. I hope you're enjoying your time back home and are living the Midwest holiday dream!
 First off, I have to confess to you that I am not a godlike coder, and this is mostly done with AI. Please forgive my insolence, but I was struck with the idea for making this and did not have the abilities myself. That being said, this website was super fun to make and I hope is a fun gift to receive :)
 
 What follows will be a little thank you message and then my review of the Bell Jar!
